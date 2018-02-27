@@ -2,28 +2,24 @@ package com.example.administrator.walkerstoursapp;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-
 import android.annotation.TargetApi;
-
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-
 import android.text.method.LinkMovementMethod;
-
 import android.util.Log;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+import com.example.administrator.walkerstoursapp.Hotel.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,13 +38,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
 
 /**
  * Created by Administrator on 11/28/2017.
@@ -56,44 +49,27 @@ import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText username, password;
+    private EditText txtEmail, txtPassword;
     String json_string ;
-    private Context context;
-    String url = "http://jwmobileapi.azurewebsites.net/api/Res/Authenticate";
-    String Response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SessionManager session = new SessionManager(getApplicationContext());
-        HashMap<String, String> user = session.getUserDetails();
-        String userId = user.get("userId").toString();
-        String categoryId = user.get("catId").toString();
-        String categoryType = user.get("catType").toString();
-        String batchId= user.get("batchId").toString();
-
         Intent intent = getIntent();
-
-        //intent.putExtra("username", "Pavithra");
-        //intent.putExtra("password", "pass#word1");
-
+        intent.putExtras(new Bundle());
         Bundle intentBundle = intent.getExtras();
 
-        /*System.out.println(intentBundle);
-        if (intentBundle == null) {
-            finish();
-            return;
-        }*/
+//      System.out.println(intentBundle);
+    //  if (intentBundle == null) {
+    //      finish();
+    //      return;
+     // }
 
-        //It gets the Username from MainActivity
         final String loggedUser = intentBundle.getString("username");
-        final String loggedUser1 = intentBundle.getString("password");
-
-        EditText loginUsername = (EditText) findViewById(R.id.email);
-        EditText loginPassword = (EditText) findViewById(R.id.password);
-
+        EditText loginUsername = (EditText) findViewById(R.id.mEmailView);
+        EditText loginPassword = (EditText) findViewById(R.id.mPasswordView);
         loginUsername.setText(loggedUser);
 
         Button UserAccount = (Button)findViewById(R.id.btnLogin);
@@ -105,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public class BackgroundTask extends AsyncTask<String, Void, String> {
 
@@ -128,20 +103,15 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-
-            if (android.os.Debug.isDebuggerConnected())
+            if(android.os.Debug.isDebuggerConnected())
                 android.os.Debug.waitForDebugger();
 
             String json_url = "http://jwmobileapi.azurewebsites.net/api/Res/Authenticate";
             try {
                 String username = params[0];
-                String password = params[1];
-
                 URL url = new URL(json_url);
-
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
-
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
 
@@ -149,17 +119,18 @@ public class LoginActivity extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
 
                 // Building the message to the PHP script
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                //  BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
                 //Making the POST URL to send to PHP code and get the result.
-                String post_data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+//                String post_data = URLEncoder.encode("Authenticate", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
 
-                // Writing the data
-                bufferedWriter.write(post_data);
+
+                //    // Writing the data
+                //    bufferedWriter.write(post_data);
 
                 // Closing all writing structures
-                bufferedWriter.flush();
-                bufferedWriter.close();
+                //     bufferedWriter.flush();
+                //    bufferedWriter.close();
                 outputStream.close();
 
                 // Building the Reading Infrastructure
@@ -173,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 while ((JSON_STRING = bufferedReader.readLine()) != null) {
 
-                    stringBuilder.append(JSON_STRING + "\n");
+                    stringBuilder.append(JSON_STRING+"\n");
 
                 }
 
@@ -192,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
             } catch (IOException e) {
-                Log.e("log_tag", "Error converting result " + e.toString());
+                Log.e("log_tag", "Error converting result "+e.toString());
 
             }
 
@@ -211,26 +182,25 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
 
             //This is removing the double quotation from string result so we can compare
-            json_string = result.replace("\"", "");
+            String json_string = result.replace("\"", "");
 
             //Trim removes the unwanted spaces from the result.
-
 
             if (json_string.trim().contentEquals("admin")) {
 
                 // Create your intent.
 
-                Intent adminIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                Intent sellerIntent = new Intent(LoginActivity.this, WelcomeActivity.class);
                 // Start the Student page activity.
-                startActivity(adminIntent);
+                startActivity(sellerIntent);
 
-            } else if (json_string.trim().contentEquals("user")) {
+            } else if (json_string.trim().contentEquals("user")){
 
                 // Create your intent.
 
-                Intent userIntent = new Intent(LoginActivity.this, com.example.administrator.walkerstoursapp.Hotel.SplashScreen.class);
+                Intent buyerIntent = new Intent(LoginActivity.this, com.example.administrator.walkerstoursapp.Hotel.SplashScreen.class);
                 // Start the teacher page activity.
-                startActivity(userIntent);
+                startActivity(buyerIntent);
             }
         }
     }
