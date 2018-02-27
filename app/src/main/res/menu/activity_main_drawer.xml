@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_menu1"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Itinerary" />
+        <item
+            android:id="@+id/nav_menu2"
+            android:icon="@mipmap/ic_perm_contact_calendar_black_24dp"
+            android:title="Contact Us" />
+        <item
+            android:id="@+id/nav_menu3"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="About Us" />
+
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_menu4"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Log Out" />
+        </menu>
+    </item>
+
+</menu>

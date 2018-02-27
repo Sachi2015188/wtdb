@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/wtly">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="130dp">
+
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="354dp"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"
+            android:hint="Name"
+            android:textAlignment="center"
+            android:textColor="#545454"
+            android:background="#E8E8E8"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:paddingLeft="20dp"
+            android:shadowRadius="5"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="354dp"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"
+            android:hint="Book No"
+            android:textAlignment="center"
+            android:textColor="#545454"
+            android:background="#E8E8E8"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:paddingLeft="20dp"
+            android:shadowRadius="5"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="354dp"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"
+            android:hint="Hotel Name"
+            android:textAlignment="center"
+            android:textColor="#545454"
+            android:background="#E8E8E8"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:paddingLeft="20dp"
+            android:shadowRadius="5"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="80dp">
+
+            <EditText
+                android:id="@+id/textView4"
+                android:layout_width="354dp"
+                android:layout_height="100dp"
+                android:inputType="textEmailAddress"
+                android:hint="Additional Notes"
+                android:textAlignment="center"
+                android:textColor="#545454"
+                android:background="#E8E8E8"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:paddingLeft="20dp"
+                android:shadowRadius="5"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:text="Deapature"
+            android:textColor="#545454"
+            android:layout_width="354dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
